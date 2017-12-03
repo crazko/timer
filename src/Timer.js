@@ -78,12 +78,14 @@ export class Timer extends Component {
     this.setState({
       minutes: this.checkValue(event.target.value)
     })
+    event.preventDefault();
   }
-
+  
   changeSeconds(event) {
     this.setState({
       seconds: this.checkValue(event.target.value)
     })
+    event.preventDefault();
   }
 
   checkValue(value) {
