@@ -6,13 +6,16 @@ class Input extends React.Component {
   }
 
   render() {
-    const {handleOnChange, isDisabled, value} = this.props;
+    let value = this.props.value;
+    if (value < 10 && value > -1) {
+      value = `0${value}`;
+    }
 
     return <input
-      disabled={isDisabled}
+      disabled={this.props.isDisabled}
       max="59"
       min="0"
-      onChange={handleOnChange}
+      onChange={this.props.handleOnChange}
       type="number"
       value={value}
     />;
