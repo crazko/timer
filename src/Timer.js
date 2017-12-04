@@ -19,18 +19,11 @@ const Checkbox = ({ handleOnChange, checked, isDisabled }) => <input
     checked={checked}
     onChange={handleOnChange}
     type="checkbox" 
-  />
-
+  />;
+  
 export class Timer extends Component {
   constructor(props) {
     super(props);
-
-    this.handleStart = this.handleStart.bind(this);
-    this.handlePause = this.handlePause.bind(this);
-    this.changeMinutes = this.changeMinutes.bind(this);
-    this.changeSeconds = this.changeSeconds.bind(this);
-    this.toggleContinueCounting = this.toggleContinueCounting.bind(this);
-    this.toggleBlink = this.toggleBlink.bind(this);
 
     this.state = {
       blink: true,
@@ -41,7 +34,7 @@ export class Timer extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     // Start counting
     if (!prevState.isCounting && this.state.isCounting) {
       const goal = new Date();
@@ -75,59 +68,58 @@ export class Timer extends Component {
     }
   }
   
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     clearInterval(this.timer);
   }
 
-  handleStart() {
+  handleStart = () => {
     this.setState({
       isCounting: true,
     })
   }
 
-  handlePause() {
+  handlePause = () => {
     this.setState({
       isCounting: false,
     })
   }
 
-  changeMinutes(event) {
+  changeMinutes = event => {
     this.setState({
       minutes: this.checkValue(event.target.value)
     });
     event.preventDefault();
   }
   
-  changeSeconds(event) {
+  changeSeconds = event => {
     this.setState({
       seconds: this.checkValue(event.target.value)
     });
     event.preventDefault();
   }
   
-  toggleContinueCounting() {
-    this.setState((prevState, props) => ({
+  toggleContinueCounting = () => {
+    this.setState(prevState => ({
       continueCounting: !prevState.continueCounting
     }));
   }
   
-  toggleBlink() {
-    this.setState((prevState, props) => ({
+  toggleBlink = () => {
+    this.setState(prevState => ({
       blink: !prevState.blink
     }));
   }
 
-  checkValue(value) {
+  checkValue = (value) => {
     value = Math.max(value, 0);
     value = Math.min(value, 59);
 
     return value;
   }
 
-  counting() {
-    this.setState((prevState, props) => {
+  counting = () => {
+    this.setState(prevState => {
       const diffInSeconds = (prevState.goal.getTime() - Date.now()) / 1000;
-
       const minutes = Math.trunc(diffInSeconds / 60);
       const seconds = Math.trunc(diffInSeconds % 60);
 
