@@ -37,10 +37,12 @@ export class Timer extends Component {
     this.handlePause = this.handlePause.bind(this);
     this.changeMinutes = this.changeMinutes.bind(this);
     this.changeSeconds = this.changeSeconds.bind(this);
+    this.toggleContinueCounting = this.toggleContinueCounting.bind(this);
+    this.toggleBlink = this.toggleBlink.bind(this);
 
     this.state = {
       blink: true,
-      continueCounting: true,
+      continueCounting: false,
       goal: undefined,
       isCounting: false,
       minutes: props.minutes,
@@ -68,6 +70,15 @@ export class Timer extends Component {
 
       clearInterval(this.timer);
     }
+    
+    if (prevState.isCounting && !this.state.continueCounting && this.state.minutes === 0 && this.state.seconds === 0) {
+      clearInterval(this.timer);
+
+      this.setState({
+        isCounting: false
+      });
+      
+    }
   }
   
   componentWillUnmount() {
@@ -89,14 +100,28 @@ export class Timer extends Component {
   changeMinutes(event) {
     this.setState({
       minutes: this.checkValue(event.target.value)
-    })
+    });
     event.preventDefault();
   }
   
   changeSeconds(event) {
     this.setState({
       seconds: this.checkValue(event.target.value)
-    })
+    });
+    event.preventDefault();
+  }
+  
+  toggleContinueCounting(event) {
+    this.setState((prevState, props) => {
+      continueCounting: !prevState.continueCounting
+    });
+    event.preventDefault();
+  }
+  
+  toggleBlink(event) {
+    this.setState((prevState, props) => {
+      blink: !prevState.blink
+    });
     event.preventDefault();
   }
 
@@ -112,7 +137,7 @@ export class Timer extends Component {
     return Number(value);
   }
 
-  counting(){
+  counting() {
     this.setState((prevState, props) => {
       const diffInSeconds = (prevState.goal.getTime() - Date.now()) / 1000;
 
@@ -121,7 +146,7 @@ export class Timer extends Component {
 
       return { 
         minutes,
-        seconds
+        seconds,
       }
     });
   }
@@ -147,8 +172,8 @@ export class Timer extends Component {
         <br/>
 
         When time is expired:<br />
-        <Checkbox isDisabled={isCounting} checked={continueCounting} handleOnChange={() => {}} /> Countinue<br />
-        <Checkbox isDisabled={isCounting} checked={blink} handleOnChange={() => {}} /> Blink<br />
+        <Checkbox isDisabled={isCounting} checked={continueCounting} handleOnChange={this.toggleContinueCounting} /> Countinue<br />
+        <Checkbox isDisabled={isCounting} checked={blink} handleOnChange={this.toggleBlink} /> Blink<br />
 
         {goal && <p>{goal.toLocaleString()}</p>}
       </div>
