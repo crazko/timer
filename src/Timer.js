@@ -22,7 +22,7 @@ class Input extends React.Component {
   }
 }
 
-const Checkbox = ({ handleOnChange, checked, isDisabled,}) => <input 
+const Checkbox = ({ handleOnChange, checked, isDisabled }) => <input 
     disabled={isDisabled}
     checked={checked}
     onChange={handleOnChange}
@@ -51,6 +51,7 @@ export class Timer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // Start counting
     if (!prevState.isCounting && this.state.isCounting) {
       const goal = new Date();
       goal.setMinutes(goal.getMinutes() + prevState.minutes);
@@ -63,6 +64,7 @@ export class Timer extends Component {
       this.timer = setInterval(this.counting.bind(this), 250);
     }
 
+    // Stop counting
     if (prevState.isCounting && !this.state.isCounting) {
       this.setState({
         goal: undefined
@@ -71,13 +73,13 @@ export class Timer extends Component {
       clearInterval(this.timer);
     }
     
+    // Stop counting when limit is reached
     if (prevState.isCounting && !this.state.continueCounting && this.state.minutes <= 0 && this.state.seconds <= 0) {
-      clearInterval(this.timer);
-
       this.setState({
         isCounting: false
       });
       
+      clearInterval(this.timer);
     }
   }
   
@@ -115,14 +117,12 @@ export class Timer extends Component {
     this.setState((prevState, props) => ({
       continueCounting: !prevState.continueCounting
     }));
-    // event.preventDefault();
   }
   
   toggleBlink(event) {
     this.setState((prevState, props) => ({
       blink: !prevState.blink
     }));
-    // event.preventDefault();
   }
 
   checkValue(value) {
