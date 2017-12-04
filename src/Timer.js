@@ -83,6 +83,15 @@ export class Timer extends Component {
     })
   }
 
+  handleReset = () => {
+    this.setState({
+      isCounting: false,
+      goal: undefined,
+      minutes: this.props.minutes,
+      seconds: this.props.seconds,
+    })
+  }
+
   changeMinutes = event => {
     this.setState({
       minutes: this.checkValue(event.target.value)
@@ -144,11 +153,14 @@ export class Timer extends Component {
           Minutes: <Input value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} />
           Seconds: <Input value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} />
         </div>
-        
-        {isCounting
-          ? <button onClick={this.handlePause}>pause</button>
-          : <button onClick={this.handleStart}>start</button>
-        }
+
+        <div class="buttons">
+          {isCounting
+            ? <button onClick={this.handlePause}>pause</button>
+            : <button onClick={this.handleStart}>start</button>
+          }
+          <button onClick={this.handleReset}>reset</button>
+        </div>
 
         <div className="settings">
           <h3>When time is expired:</h3>
