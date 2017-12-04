@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 
-class Input extends React.Component {
-  componentWillReceiveProps(nextProps) {
-
-  }
-
-  render() {
-    let value = this.props.value;
-    if (value < 10 && value > -1) {
-      value = `0${value}`;
-    }
-
-    return <input
-      disabled={this.props.isDisabled}
-      max="59"
-      min="0"
-      onChange={this.props.handleOnChange}
-      type="number"
-      value={value}
-    />;
-  }
+const Input = ({ handleOnChange, value, isDisabled }) => {
+  const leadingZero = (value > -10 && value < 10) ? '0' : '';
+  const negative = Math.sign(value) === -1 ? '-' : '';
+  
+  return <input
+    disabled={isDisabled}
+    max="59"
+    min="0"
+    onChange={handleOnChange}
+    type="number"
+    value={negative + leadingZero + Math.abs(value)}
+  />;
 }
 
 const Checkbox = ({ handleOnChange, checked, isDisabled }) => <input 
@@ -76,6 +68,7 @@ export class Timer extends Component {
     // Stop counting when limit is reached
     if (prevState.isCounting && !this.state.continueCounting && this.state.minutes <= 0 && this.state.seconds <= 0) {
       this.setState({
+        goal: undefined,
         isCounting: false
       });
       
@@ -152,12 +145,14 @@ export class Timer extends Component {
   }
 
   render() {
-    const { blink,
+    const {
+      blink,
       continueCounting,
       goal,
       isCounting,
       minutes,
-      seconds } = this.state;
+      seconds
+    } = this.state;
 
     return (
       <div className="timer">
