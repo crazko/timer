@@ -8,10 +8,6 @@ button {
   width: 100%;
 }
 
-label {
-  cursor: pointer;
-}
-
 input {
   background-color: #fff;
   border: none;
@@ -19,4 +15,14 @@ input {
   font-size: 5em;
   text-align: right;
   width: 2em;
+}
+
+.option,
+.optionActive {
+  cursor: pointer;
+}
+
+.optionActive span::before {
+  display: inline;
+  content: '✓'
 }

@@ -14,11 +14,12 @@ const Input = ({ handleOnChange, value, isDisabled }) => {
   />;
 }
 
-const Checkbox = ({ checked }) => <input 
-    disabled={true}
-    checked={checked}
-    type="checkbox" 
-  />;
+const Option = ({ active, title, onClick }) => <div
+    className={active ? 'optionActive' : 'option'}
+    onClick={onClick}
+  >
+    <span>{title}</span>
+  </div>;
 
 export class Timer extends Component {
   constructor(props) {
@@ -154,7 +155,7 @@ export class Timer extends Component {
           Seconds: <Input value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} />
         </div>
 
-        <div class="buttons">
+        <div className="buttons">
           {isCounting
             ? <button onClick={this.handlePause}>pause</button>
             : <button onClick={this.handleStart}>start</button>
@@ -164,8 +165,8 @@ export class Timer extends Component {
 
         <div className="settings">
           <h3>When time is expired:</h3>
-          <label onClick={this.toggleContinueCounting}><Checkbox checked={continueCounting} /> Countinue</label>
-          <label onClick={this.toggleBlink}><Checkbox checked={blink} /> Blink</label>
+          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="Continue" />
+          <Option onClick={this.toggleBlink} active={blink} title="Blink" />
         </div>
       </div>
     );
