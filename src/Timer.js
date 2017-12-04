@@ -34,8 +34,7 @@ export class Timer extends Component {
 
     this.state = {
       blink: true,
-      continueCounting: false,
-      goal: undefined,
+      continueCounting: true,
       isCounting: false,
       minutes: props.minutes,
       seconds: props.seconds,
@@ -106,28 +105,23 @@ export class Timer extends Component {
     event.preventDefault();
   }
   
-  toggleContinueCounting(event) {
+  toggleContinueCounting() {
     this.setState((prevState, props) => ({
       continueCounting: !prevState.continueCounting
     }));
   }
   
-  toggleBlink(event) {
+  toggleBlink() {
     this.setState((prevState, props) => ({
       blink: !prevState.blink
     }));
   }
 
   checkValue(value) {
-    if (value < 0) {
-      value = 0;
-    }
+    value = Math.max(value, 0);
+    value = Math.min(value, 59);
 
-    if (value > 59) {
-      value = 59;
-    }
-
-    return Number(value);
+    return value;
   }
 
   counting() {
