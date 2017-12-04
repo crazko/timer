@@ -1,0 +1,22 @@
+language: node_js
+node_js: n7
+
+install:
+    - npm install
+
+# before_script:
+    # - npm test
+
+script:
+    - npm run build
+
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GH_TOKEN
+    local_dir: build
+    on:
+        branch: master
+
+notifications:
+    email: false
