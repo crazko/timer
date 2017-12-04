@@ -22,6 +22,13 @@ class Input extends React.Component {
   }
 }
 
+const Checkbox = ({ handleOnChange, checked, isDisabled,}) => <input 
+    disabled={isDisabled}
+    checked={checked}
+    onChange={handleOnChange}
+    type="checkbox" 
+  />
+
 export class Timer extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +39,12 @@ export class Timer extends Component {
     this.changeSeconds = this.changeSeconds.bind(this);
 
     this.state = {
+      blink: true,
+      continueCounting: true,
+      goal: undefined,
       isCounting: false,
       minutes: props.minutes,
       seconds: props.seconds,
-      goal: undefined
     }
   }
 
@@ -49,7 +58,7 @@ export class Timer extends Component {
         goal
       })
       
-      this.timer = setInterval(this.counting.bind(this), 200);
+      this.timer = setInterval(this.counting.bind(this), 250);
     }
 
     if (prevState.isCounting && !this.state.isCounting) {
@@ -104,11 +113,11 @@ export class Timer extends Component {
   }
 
   counting(){
-    this.setState(function(prevState, props) {
+    this.setState((prevState, props) => {
       const diffInSeconds = (prevState.goal.getTime() - Date.now()) / 1000;
 
-      const minutes = Math.floor(diffInSeconds / 60);
-      const seconds = Math.floor(diffInSeconds % 60);
+      const minutes = Math.trunc(diffInSeconds / 60);
+      const seconds = Math.trunc(diffInSeconds % 60);
 
       return { 
         minutes,
@@ -118,7 +127,13 @@ export class Timer extends Component {
   }
 
   render() {
-    const { seconds, minutes, isCounting, goal } = this.state;
+    const { blink,
+      continueCounting,
+      goal,
+      isCounting,
+      minutes,
+      seconds } = this.state;
+
     return (
       <div className="timer">
         Minutes: <Input value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} />
@@ -131,9 +146,9 @@ export class Timer extends Component {
 
         <br/>
 
-        When times is expired:<br />
-        <input type="checkbox" /> Countinue<br />
-        <input type="checkbox" /> Blink<br />
+        When time is expired:<br />
+        <Checkbox isDisabled={isCounting} checked={continueCounting} handleOnChange={() => {}} /> Countinue<br />
+        <Checkbox isDisabled={isCounting} checked={blink} handleOnChange={() => {}} /> Blink<br />
 
         {goal && <p>{goal.toLocaleString()}</p>}
       </div>
