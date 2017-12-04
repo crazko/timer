@@ -14,13 +14,12 @@ const Input = ({ handleOnChange, value, isDisabled }) => {
   />;
 }
 
-const Checkbox = ({ handleOnChange, checked, isDisabled }) => <input 
-    disabled={isDisabled}
+const Checkbox = ({ checked }) => <input 
+    disabled={true}
     checked={checked}
-    onChange={handleOnChange}
     type="checkbox" 
   />;
-  
+
 export class Timer extends Component {
   constructor(props) {
     super(props);
@@ -141,19 +140,21 @@ export class Timer extends Component {
 
     return (
       <div className="timer">
-        Minutes: <Input value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} />
-        Seconds: <Input value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} />
-
+        <div className="time">
+          Minutes: <Input value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} />
+          Seconds: <Input value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} />
+        </div>
+        
         {isCounting
           ? <button onClick={this.handlePause}>pause</button>
           : <button onClick={this.handleStart}>start</button>
         }
 
-        <br/>
-
-        When time is expired:<br />
-        <Checkbox isDisabled={isCounting} checked={continueCounting} handleOnChange={this.toggleContinueCounting} /> Countinue<br />
-        <Checkbox isDisabled={isCounting} checked={blink} handleOnChange={this.toggleBlink} /> Blink<br />
+        <div className="settings">
+          <h3>When time is expired:</h3>
+          <label onClick={this.toggleContinueCounting}><Checkbox checked={continueCounting} /> Countinue</label>
+          <label onClick={this.toggleBlink}><Checkbox checked={blink} /> Blink</label>
+        </div>
       </div>
     );
   }
