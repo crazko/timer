@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 
-const Input = ({ handleOnChange, value, isDisabled }) => {
+const Unit = ({ handleOnChange, value, isDisabled, title }) => {
   const leadingZero = (value > -10 && value < 10) ? '0' : '';
   const negative = Math.sign(value) === -1 ? '-' : '';
   
-  return <input
-    disabled={isDisabled}
-    max="59"
-    min="0"
-    onChange={handleOnChange}
-    type="number"
-    value={negative + leadingZero + Math.abs(value)}
-  />;
+  return <div className="unit">
+    <strong className="unit__title">{title}</strong>
+    <input
+      disabled={isDisabled}
+      max="59"
+      min="0"
+      onChange={handleOnChange}
+      type="number"
+      value={negative + leadingZero + Math.abs(value)}
+    />
+  </div>;
 }
 
 const Option = ({ active, title, onClick }) => <div
@@ -151,8 +154,8 @@ export class Timer extends Component {
     return (
       <div className="timer">
         <div className="time">
-          Minutes: <Input value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} />
-          Seconds: <Input value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} />
+          <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes"/>
+          <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
         </div>
 
         <div className="buttons">

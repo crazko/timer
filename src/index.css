@@ -1,11 +1,33 @@
-body, input {
+body {
   font-family: sans-serif;
-  background: rgb(255, 255, 222);
+  margin: 0;
+  padding: 0;
 }
 
 button {
   display: block;
   width: 100%;
+}
+
+
+.timer {
+  background-color: rgb(159, 248, 214);
+  height: 100vh;
+  width: 100vw;
+}
+
+.time {
+  display: flex;
+  justify-content: center;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.unit__title {
+  text-align: center;
 }
 
 input {
@@ -15,6 +37,7 @@ input {
   font-size: 5em;
   text-align: right;
   width: 2em;
+  margin: 15px;
 }
 
 .option,
