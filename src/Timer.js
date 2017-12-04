@@ -148,7 +148,6 @@ export class Timer extends Component {
     const {
       blink,
       continueCounting,
-      goal,
       isCounting,
       minutes,
       seconds
@@ -169,8 +168,6 @@ export class Timer extends Component {
         When time is expired:<br />
         <Checkbox isDisabled={isCounting} checked={continueCounting} handleOnChange={this.toggleContinueCounting} /> Countinue<br />
         <Checkbox isDisabled={isCounting} checked={blink} handleOnChange={this.toggleBlink} /> Blink<br />
-
-        {goal && <p>{goal.toLocaleString()}</p>}
       </div>
     );
   }
