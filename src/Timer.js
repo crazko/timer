@@ -71,7 +71,7 @@ export class Timer extends Component {
       clearInterval(this.timer);
     }
     
-    if (prevState.isCounting && !this.state.continueCounting && this.state.minutes === 0 && this.state.seconds === 0) {
+    if (prevState.isCounting && !this.state.continueCounting && this.state.minutes <= 0 && this.state.seconds <= 0) {
       clearInterval(this.timer);
 
       this.setState({
@@ -112,17 +112,17 @@ export class Timer extends Component {
   }
   
   toggleContinueCounting(event) {
-    this.setState((prevState, props) => {
+    this.setState((prevState, props) => ({
       continueCounting: !prevState.continueCounting
-    });
-    event.preventDefault();
+    }));
+    // event.preventDefault();
   }
   
   toggleBlink(event) {
-    this.setState((prevState, props) => {
+    this.setState((prevState, props) => ({
       blink: !prevState.blink
-    });
-    event.preventDefault();
+    }));
+    // event.preventDefault();
   }
 
   checkValue(value) {
