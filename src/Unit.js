@@ -5,7 +5,7 @@ export const Unit = ({ handleOnChange, value, isDisabled, title }) => {
   const negative = Math.sign(value) === -1 ? '-' : '';
   
   return <div className="flex flex-col-reverse">
-    <strong className="text-center">{title}</strong>
+    <span className="text-center">{title}</span>
     <input
       className="bg-white rounded-lg m-2 text-5xl text-right"
       disabled={isDisabled}
