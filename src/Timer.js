@@ -1,30 +1,6 @@
 import React, { Component } from 'react';
-
-const Unit = ({ handleOnChange, value, isDisabled, title }) => {
-  const leadingZero = (value > -10 && value < 10) ? '0' : '';
-  const negative = Math.sign(value) === -1 ? '-' : '';
-  
-  return <div className="flex flex-col-reverse">
-    <strong className="text-center">{title}</strong>
-    <input
-      className="bg-white rounded-lg m-2 text-5xl text-right"
-      disabled={isDisabled}
-      max="59"
-      min="0"
-      onChange={handleOnChange}
-      type="number"
-      value={negative + leadingZero + Math.abs(value)}
-    />
-  </div>;
-}
-
-const Option = ({ active, title, onClick }) => <div
-    className="cursor-pointer"
-    onClick={onClick}
-  >
-    {active && <span>✓</span>}
-    {title}
-  </div>;
+import { Option } from './Option';
+import { Unit } from './Unit';
 
 export class Timer extends Component {
   constructor(props) {
@@ -154,24 +130,24 @@ export class Timer extends Component {
     } = this.state;
 
     return (
-      <div className="bg-grey-light w-screen h-screen">
+      <div className="flex flex-col justify-center bg-grey-light w-screen h-screen">
         <div className="flex justify-center text-center">
           <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes"/>
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
         </div>
 
-        <div>
+        <div className="text-center">When time is expired:</div>
+        <div className="flex justify-center">
+          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="Continue counting" />
+          <Option onClick={this.toggleBlink} active={blink} title="Blink" />
+        </div>
+
+        <div className="flex justify-center">
           {isCounting
             ? <button onClick={this.handlePause}>pause</button>
             : <button onClick={this.handleStart}>start</button>
           }
           <button onClick={this.handleReset}>reset</button>
-        </div>
-
-        <div>
-          <h3>When time is expired:</h3>
-          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="Continue" />
-          <Option onClick={this.toggleBlink} active={blink} title="Blink" />
         </div>
       </div>
     );
