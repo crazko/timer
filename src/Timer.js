@@ -100,7 +100,7 @@ export class Timer extends Component {
     }));
   }
 
-  checkValue = (value) => {
+  checkValue = value => {
     value = Math.max(value, 0);
     value = Math.min(value, 59);
 
@@ -136,12 +136,9 @@ export class Timer extends Component {
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
         </div>
 
-        <div className="flex justify-center mt-3">
-          {isCounting
-            ? <button onClick={this.handlePause}>pause</button>
-            : <button onClick={this.handleStart}>start</button>
-          }
-          <button onClick={this.handleReset}>reset</button>
+        <div className="flex justify-center items-center mt-3">
+          <div onClick={isCounting ? this.handlePause : this.handleStart} className="w-10 h-10 bg-green text-white rounded-full m-1">{isCounting ? <span></span> : <span></span>}</div>
+          <div onClick={this.handleReset} className="w-6 h-6 bg-red rounded-full m-1"></div>
         </div>
 
         <div className="flex justify-center mt-3">

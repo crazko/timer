@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Option = ({ active, title, onClick }) => <div
-    className="bg-grey-lightest hover:bg-grey py-1 px-2 m-1 rounded cursor-pointer"
+    className="text-grey-darkest bg-grey-lightest hover:text-black border hover:border-grey py-1 px-2 m-1 rounded cursor-pointer"
     onClick={onClick}
   >
     {title}
