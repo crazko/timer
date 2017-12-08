@@ -7,7 +7,7 @@ export const Unit = ({ handleOnChange, value, isDisabled, title }) => {
   return <div className="flex flex-col-reverse">
     <span className="text-center">{title}</span>
     <input
-      className="bg-white rounded-lg m-2 text-5xl text-right"
+      className="bg-white rounded-lg m-2 shadow text-5xl text-right"
       disabled={isDisabled}
       max="59"
       min="0"

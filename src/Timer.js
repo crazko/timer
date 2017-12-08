@@ -136,21 +136,21 @@ export class Timer extends Component {
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
         </div>
 
-        <div className="flex justify-center my-3">
-          <span className="border-t border-grey pt-3 uppercase text-xs text-grey-darkest">when time is expired</span>
-        </div>
-
-        <div className="flex justify-center mb-3">
-          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="continue counting" />
-          <Option onClick={this.toggleBlink} active={blink} title="blink" />
-        </div>
-
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-3">
           {isCounting
             ? <button onClick={this.handlePause}>pause</button>
             : <button onClick={this.handleStart}>start</button>
           }
           <button onClick={this.handleReset}>reset</button>
+        </div>
+
+        <div className="flex justify-center mt-3">
+          <span className="border-t border-grey pt-3 uppercase text-xs text-grey-darkest">when time is expired</span>
+        </div>
+
+        <div className="flex justify-center mt-3">
+          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="continue counting" />
+          <Option onClick={this.toggleBlink} active={blink} title="blink" />
         </div>
       </div>
     );
