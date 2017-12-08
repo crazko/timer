@@ -4,9 +4,10 @@ const Unit = ({ handleOnChange, value, isDisabled, title }) => {
   const leadingZero = (value > -10 && value < 10) ? '0' : '';
   const negative = Math.sign(value) === -1 ? '-' : '';
   
-  return <div className="unit">
-    <strong className="unit__title">{title}</strong>
+  return <div className="flex flex-col-reverse">
+    <strong className="text-center">{title}</strong>
     <input
+      className="bg-white rounded-lg m-2 text-5xl text-right"
       disabled={isDisabled}
       max="59"
       min="0"
@@ -18,10 +19,11 @@ const Unit = ({ handleOnChange, value, isDisabled, title }) => {
 }
 
 const Option = ({ active, title, onClick }) => <div
-    className={active ? 'optionActive' : 'option'}
+    className="cursor-pointer"
     onClick={onClick}
   >
-    <span>{title}</span>
+    {active && <span>✓</span>}
+    {title}
   </div>;
 
 export class Timer extends Component {
@@ -152,13 +154,13 @@ export class Timer extends Component {
     } = this.state;
 
     return (
-      <div className="timer">
-        <div className="time">
+      <div className="bg-grey-light w-screen h-screen">
+        <div className="flex justify-center text-center">
           <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes"/>
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
         </div>
 
-        <div className="buttons">
+        <div>
           {isCounting
             ? <button onClick={this.handlePause}>pause</button>
             : <button onClick={this.handleStart}>start</button>
@@ -166,7 +168,7 @@ export class Timer extends Component {
           <button onClick={this.handleReset}>reset</button>
         </div>
 
-        <div className="settings">
+        <div>
           <h3>When time is expired:</h3>
           <Option onClick={this.toggleContinueCounting} active={continueCounting} title="Continue" />
           <Option onClick={this.toggleBlink} active={blink} title="Blink" />
