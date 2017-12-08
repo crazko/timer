@@ -7,11 +7,11 @@ export class Timer extends Component {
     super(props);
 
     this.state = {
-      blink: true,
-      continueCounting: true,
       isCounting: false,
       minutes: props.minutes,
       seconds: props.seconds,
+      shouldBlink: true,
+      shouldContinue: true,
     }
   }
 
@@ -29,22 +29,19 @@ export class Timer extends Component {
       this.timer = setInterval(this.counting.bind(this), 250);
     }
 
-    // Stop counting
+    // Stop counting when limit is reached
+    if (this.state.isCounting && !this.state.shouldContinue && this.state.goal <= new Date()) {
+      this.setState({
+        isCounting: false
+      });      
+    }
+
+    // Clear goal when counting is over
     if (prevState.isCounting && !this.state.isCounting) {
       this.setState({
         goal: undefined
       })
 
-      clearInterval(this.timer);
-    }
-    
-    // Stop counting when limit is reached
-    if (prevState.isCounting && !this.state.continueCounting && this.state.minutes <= 0 && this.state.seconds <= 0) {
-      this.setState({
-        goal: undefined,
-        isCounting: false
-      });
-      
       clearInterval(this.timer);
     }
   }
@@ -90,13 +87,13 @@ export class Timer extends Component {
   
   toggleContinueCounting = () => {
     this.setState(prevState => ({
-      continueCounting: !prevState.continueCounting
+      shouldContinue: !prevState.shouldContinue
     }));
   }
   
   toggleBlink = () => {
     this.setState(prevState => ({
-      blink: !prevState.blink
+      shouldBlink: !prevState.shouldBlink
     }));
   }
 
@@ -122,15 +119,17 @@ export class Timer extends Component {
 
   render() {
     const {
-      blink,
-      continueCounting,
+      shouldBlink,
+      shouldContinue,
       isCounting,
       minutes,
       seconds
     } = this.state;
 
+    const timerBackground = this.state.goal <= new Date() ? 'bg-red-light' : 'bg-grey-light';
+
     return (
-      <div className="flex flex-col justify-center bg-grey-light w-screen h-screen">
+      <div className={'timer flex flex-col justify-center w-screen h-screen ' + timerBackground}>
         <div className="units flex justify-center">
           <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes"/>
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
@@ -146,8 +145,8 @@ export class Timer extends Component {
         </div>
 
         <div className="flex justify-center mt-3">
-          <Option onClick={this.toggleContinueCounting} active={continueCounting} title="continue counting" />
-          <Option onClick={this.toggleBlink} active={blink} title="blink" />
+          <Option onClick={this.toggleContinueCounting} active={shouldContinue} title="continue counting" />
+          <Option onClick={this.toggleBlink} active={shouldBlink} title="blink" />
         </div>
       </div>
     );
