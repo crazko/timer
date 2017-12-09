@@ -126,7 +126,7 @@ export class Timer extends Component {
       seconds
     } = this.state;
 
-    const isExpired = this.state.goal <= new Date();
+    const isExpired = minutes < 0 || seconds < 0;
     const timerBackground = isExpired ? 'bg-red-light' : 'bg-grey-light';
 
     return (
