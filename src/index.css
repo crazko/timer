@@ -1,3 +1,7 @@
+html {
+	touch-action: manipulation;
+}
+
 .timer {
 	transition: background-color ease .25s;
 }
