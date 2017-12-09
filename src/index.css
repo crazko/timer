@@ -23,3 +23,13 @@ textarea {
 	max-width: 30vw;
 	transition: color ease .25s;
 }
+
+.settings,
+.settingsHidden {
+	transition: opacity ease .25s;
+}
+
+.settingsHidden {
+	opacity: 0;
+	pointer-events: none;
+}
