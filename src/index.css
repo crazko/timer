@@ -2,6 +2,23 @@ html {
 	touch-action: manipulation;
 }
 
+a,
+button,
+div,
+input,
+label,
+select,
+textarea {
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
 .timer {
 	transition: background-color ease .25s;
+}
+
+.unit {
+	font-size: 20vw;
+	max-width: 35vw;
+	transition: color ease .25s;
 }

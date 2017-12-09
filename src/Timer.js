@@ -126,18 +126,19 @@ export class Timer extends Component {
       seconds
     } = this.state;
 
-    const timerBackground = this.state.goal <= new Date() ? 'bg-red-light' : 'bg-grey-light';
+    const isExpired = this.state.goal <= new Date();
+    const timerBackground = isExpired ? 'bg-red-light' : 'bg-grey-light';
 
     return (
       <div className={'timer flex flex-col justify-center w-screen h-screen ' + timerBackground}>
         <div className="units flex justify-center">
-          <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes"/>
-          <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" />
+          <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes" isExpired={isExpired} />
+          <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" isExpired={isExpired} />
         </div>
 
         <div className="flex justify-center items-center mt-3">
-          <div onClick={isCounting ? this.handlePause : this.handleStart} className="w-10 h-10 bg-green text-white rounded-full m-1">{isCounting ? <span></span> : <span></span>}</div>
-          <div onClick={this.handleReset} className="w-6 h-6 bg-red rounded-full m-1"></div>
+          <div onClick={isCounting ? this.handlePause : this.handleStart} className="w-16 h-16 bg-green hover:bg-green-dark text-white rounded-full m-1 cursor-pointer">{isCounting ? <span></span> : <span></span>}</div>
+          <div onClick={this.handleReset} className="w-10 h-10 bg-red hover:bg-red-dark rounded-full m-1 cursor-pointer"></div>
         </div>
 
         <div className="flex justify-center mt-3">
