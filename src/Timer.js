@@ -141,7 +141,7 @@ export class Timer extends Component {
           <div onClick={this.handleReset} className="w-10 h-10 bg-red hover:bg-red-dark rounded-full m-1 cursor-pointer"></div>
         </div>
 
-        <div className={isCounting ? 'settingsHidden': 'settings'}>
+        <div className={isCounting ? 'settings pointer-events-none opacity-0': 'settings'}>
           <div className="flex justify-center mt-3">
             <span className="border-t border-grey pt-3 uppercase text-xs text-grey-darkest">when time is expired</span>
           </div>
