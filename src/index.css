@@ -1,6 +1,6 @@
 html {
-	overflow: hidden;
-	touch-action: manipulation;
+  overflow: hidden;
+  touch-action: manipulation;
 }
 
 a,
@@ -10,43 +10,43 @@ input,
 label,
 select,
 textarea {
-	outline: none;
-	-webkit-tap-highlight-color: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .timer {
-	transition: background-color ease .25s;
+  transition: background-color ease 0.25s;
 }
 
 .unit {
-	font-size: 20vw;
-	max-width: 30vw;
-	transition: color ease .25s;
+  font-size: 20vw;
+  max-width: 30vw;
+  transition: color ease 0.25s;
 }
 
 .settings {
-	max-height: 500px;
-	overflow: hidden;
-	transition: all ease .5s;
+  max-height: 500px;
+  overflow: hidden;
+  transition: all ease 0.5s;
 }
 
 .settings--inactive {
-	max-height: 0;
-	opacity: 0;
-	pointer-events: none;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .blink {
-	animation-duration: .25s;
-	animation-iteration-count: 4;
-	animation-name: blink;
+  animation-duration: 0.25s;
+  animation-iteration-count: 4;
+  animation-name: blink;
 }
 
 @keyframes blink {
-	10% {
-		background-color: #EF5753;
-	}
-	100% {
-		background-color: #DAE4E9;
-	}
+  10% {
+    background-color: #ef5753;
+  }
+  100% {
+    background-color: #dae4e9;
+  }
 }
