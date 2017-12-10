@@ -44,6 +44,17 @@ export class Timer extends Component {
 
       clearInterval(this.timer);
     }
+
+    // Reset time when changing expired values
+    if (!this.state.isCounting && (
+      prevState.minutes !== this.state.minutes
+      || prevState.seconds !== this.state.seconds
+     )) {
+      this.setState({
+        minutes: Math.abs(this.state.minutes),
+        seconds: Math.abs(this.state.seconds),
+      });
+    }
   }
   
   componentWillUnmount = () => {
