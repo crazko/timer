@@ -2,12 +2,12 @@ import React from 'react';
 
 export const Unit = ({ handleOnChange, value, isDisabled, title, isExpired }) => {
   const leadingZero = (value > -10 && value < 10) ? '0' : '';
-  const textColor = isExpired ? ' text-red-dark' : '';
+  const textColor = isExpired ? ' text-red-dark' : ' text-blue-darkest';
   
   return <div className="flex flex-col-reverse">
     <span className="text-center">{title}</span>
     <input
-      className={'unit bg-white rounded-lg m-2 shadow text-right font-mono appearance-none border hover:border-grey' + textColor}
+      className={'unit m-2 text-right font-mono appearance-none bg-transparent' + textColor}
       disabled={isDisabled}
       max="59"
       min="0"

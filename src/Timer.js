@@ -138,10 +138,9 @@ export class Timer extends Component {
     } = this.state;
 
     const isExpired = minutes < 0 || seconds < 0;
-    const timerBackground = isExpired ? 'bg-red-light' : 'bg-grey-light';
 
     return (
-      <div className={'timer flex flex-col justify-center w-screen h-screen ' + timerBackground}>
+      <div className="timer flex flex-col justify-center w-screen h-screen bg-grey-light">
         <div className="units flex justify-center">
           <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes" isExpired={isExpired} />
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" isExpired={isExpired} />
