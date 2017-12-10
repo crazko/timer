@@ -138,9 +138,10 @@ export class Timer extends Component {
     } = this.state;
 
     const isExpired = minutes < 0 || seconds < 0;
+    const blinkClass = isCounting && shouldBlink && seconds === 0 ? ' blink' : '';
 
     return (
-      <div className="timer flex flex-col justify-center w-screen h-screen bg-grey-light">
+      <div className={'timer flex flex-col justify-center w-screen h-screen bg-grey-light' + blinkClass}>
         <div className="units flex justify-center">
           <Unit value={minutes} handleOnChange={this.changeMinutes} isDisabled={isCounting} title="minutes" isExpired={isExpired} />
           <Unit value={seconds} handleOnChange={this.changeSeconds} isDisabled={isCounting} title="seconds" isExpired={isExpired} />

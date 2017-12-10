@@ -35,3 +35,18 @@ textarea {
 	opacity: 0;
 	pointer-events: none;
 }
+
+.blink {
+	animation-duration: .25s;
+	animation-iteration-count: 4;
+	animation-name: blink;
+}
+
+@keyframes blink {
+	10% {
+		background-color: #EF5753;
+	}
+	100% {
+		background-color: #DAE4E9;
+	}
+}
