@@ -132,7 +132,7 @@ export class Timer extends Component {
     const { shouldBlink, shouldContinue, isCounting, minutes, seconds } = this.state;
 
     const isExpired = minutes < 0 || seconds < 0;
-    const blinkClass = isCounting && shouldBlink && seconds === 0 ? ' blink' : '';
+    const blinkClass = isCounting && shouldBlink && minutes === 0 && seconds === 0 ? ' blink' : '';
 
     return (
       <div className={'timer flex flex-col justify-center w-screen h-screen bg-grey-light' + blinkClass}>
@@ -157,8 +157,7 @@ export class Timer extends Component {
           <div
             onClick={isCounting ? this.handlePause : this.handleStart}
             className="w-16 h-16 bg-green hover:bg-green-dark text-white rounded-full m-1 cursor-pointer"
-          >
-          </div>
+          />
           <div
             onClick={this.handleReset}
             className="w-10 h-10 bg-red hover:bg-red-dark rounded-full m-1 cursor-pointer"
