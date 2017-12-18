@@ -36,6 +36,27 @@ textarea {
   pointer-events: none;
 }
 
+.startButton,
+.pauseButton {
+  transition: background-color ease 0.5s;
+}
+
+.startButton {
+  background: #38c172;
+}
+
+.startButton:hover {
+  background: #1f9d55;
+}
+
+.pauseButton {
+  background: #f2d024;
+}
+
+.pauseButton:hover {
+  background: #ad9311;
+}
+
 .blink {
   animation-duration: 0.25s;
   animation-iteration-count: 4;

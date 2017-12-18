@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Option } from './Option';
 import { Unit } from './Unit';
+import * as Icon from 'react-feather';
 
 export class Timer extends Component {
   constructor(props) {
@@ -133,6 +134,7 @@ export class Timer extends Component {
 
     const isExpired = minutes < 0 || seconds < 0;
     const blinkClass = isCounting && shouldBlink && minutes === 0 && seconds === 0 ? ' blink' : '';
+    const startPauseButtonClass = isCounting ? 'pauseButton' : 'startButton';
 
     return (
       <div className={'timer flex flex-col justify-center w-screen h-screen bg-grey-light' + blinkClass}>
@@ -156,12 +158,19 @@ export class Timer extends Component {
         <div className="flex justify-center items-center mt-3">
           <div
             onClick={isCounting ? this.handlePause : this.handleStart}
-            className="w-16 h-16 bg-green hover:bg-green-dark text-white rounded-full m-1 cursor-pointer"
-          />
+            className={
+              'w-16 h-16 hover:bg-green-dark text-white rounded-full m-1 cursor-pointer flex justify-center items-center ' +
+              startPauseButtonClass
+            }
+          >
+            {isCounting ? <Icon.Pause color="white" /> : <Icon.Play color="white" />}
+          </div>
           <div
             onClick={this.handleReset}
-            className="w-10 h-10 bg-red hover:bg-red-dark rounded-full m-1 cursor-pointer"
-          />
+            className="w-10 h-10 bg-red hover:bg-red-dark rounded-full m-1 cursor-pointer flex justify-center items-center"
+          >
+            <Icon.RefreshCcw color="white" />
+          </div>
         </div>
 
         <div className={isCounting ? 'settings settings--inactive' : 'settings'}>
